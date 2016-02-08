@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Dimogir.DomainModel
 {
-    public class Lesson
+    public class Lesson : Entity<int>
     {
-        public int Id { get; set; }
-
         public string Title { get; set; }
 
         public string Description { get; set; }
 
         public string Body { get; set; }
+
+        public int ParentId { get; set; }
     }
 }
