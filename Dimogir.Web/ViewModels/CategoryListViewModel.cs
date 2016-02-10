@@ -8,6 +8,8 @@ namespace Dimogir.Web.ViewModels
     public class CategoryViewModel
     {
         public string Name { get; set; }
+
+        public string Key { get; set; }
     }
 
     public class CategoryListViewModel

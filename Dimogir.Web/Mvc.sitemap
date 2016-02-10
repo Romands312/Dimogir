@@ -3,7 +3,7 @@
             xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
             xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
 
-  <mvcSiteMapNode title="Адские уроки" controller="Lesson" action="List">
+  <mvcSiteMapNode title="Адские уроки" controller="Lesson" action="CategoryList">
     <mvcSiteMapNode title="Адские упражнения" controller="Exercise" action="List"/>
   </mvcSiteMapNode>
 </mvcSiteMap>

@@ -1,0 +1,10 @@
+﻿@model Dimogir.Web.ViewModels.CategoryListViewModel
+
+<h1>Адский список категорий</h1>
+
+@foreach (var category in Model.CategoryViewModels)
+{
+    <div>
+        <a href="@Url.RouteUrl("LessonList", new { categoryKey = category.Key })">@category.Name</a>
+    </div>
+}

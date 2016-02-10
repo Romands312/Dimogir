@@ -1,10 +1,11 @@
-﻿@model Dimogir.Web.ViewModels.CategoryListViewModel
+﻿@model Dimogir.Web.ViewModels.LessonListViewModel
 
-<h1>Адский список категорий</h1>
+<h1>Адский список уроков категории @Model.CategoryName</h1>
 
-@foreach (var category in Model.CategoryViewModels)
+@foreach (var lesson in Model.LessonViewModels)
 {
     <div>
-        @category.Name
+        <a href="@Url.RouteUrl("ShowLesson", new {lessonKey = lesson.Key})">@lesson.Title</a>
+        <div class="well well-sm">@lesson.Description</div>
     </div>
 }

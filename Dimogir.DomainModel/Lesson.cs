@@ -14,6 +14,7 @@ namespace Dimogir.DomainModel
 
         public string Body { get; set; }
 
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
+        public string CategoryId { get; set; }
     }
 }

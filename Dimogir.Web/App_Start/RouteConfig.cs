@@ -13,9 +13,11 @@ namespace Dimogir.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute("LessonList", "lesson/list", new { controller = "Lesson", action = "List" });
+            routes.MapRoute("LessonList", "lesson/{categoryKey}/list", new { controller = "Lesson", action = "List" });
 
-            routes.MapRoute("ShowLesson", "lesson/{id}", new { controller = "Lesson", action = "Show" });
+            routes.MapRoute("CategoryList", "lesson/categories", new { controller = "Lesson", action = "CategoryList" });
+
+            routes.MapRoute("ShowLesson", "lesson/{lessonKey}", new { controller = "Lesson", action = "Show" });
 
             routes.MapRoute("ExerciseList", "exercise/list", new { controller = "Exercise", action = "List" });
 

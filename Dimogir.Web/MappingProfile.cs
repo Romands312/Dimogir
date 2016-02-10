@@ -12,7 +12,11 @@ namespace Dimogir.Web
     {
         protected override void Configure()
         {
-            CreateMap<Category, CategoryViewModel>();
+            CreateMap<Category, CategoryViewModel>()
+                .ForMember("Key", cfg => cfg.MapFrom(src => src.Id));
+
+            CreateMap<Lesson, LessonViewModel>()
+                .ForMember("Key", cfg => cfg.MapFrom(src => src.Id.ToString()));
         }
     }
 }
