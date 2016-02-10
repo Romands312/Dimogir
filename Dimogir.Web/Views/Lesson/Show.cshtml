@@ -3,4 +3,4 @@
 
 <h1>@Model.Title</h1>
 
-<div>@Model.Body</div>
+<div>@Html.Raw(HttpUtility.HtmlDecode(Model.Body))</div>

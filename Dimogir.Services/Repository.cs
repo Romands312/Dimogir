@@ -6,13 +6,16 @@ using Dimogir.DomainModel;
 
 namespace Dimogir.Services
 {
-    public interface IRepository<out TEntity, in TKey>
+    public interface IRepository<TEntity, in TKey>
+        where TEntity : Entity<TKey>
     {
         TEntity[] GetAll();
         TEntity Load(TKey key);
+
+        void Create(TEntity entity);
     }
 
-    public abstract class Repository<TEntity, TKey> : IRepository<TEntity, TKey> 
+    public abstract class Repository<TEntity, TKey> : IRepository<TEntity, TKey>
         where TEntity : Entity<TKey>
     {
         protected DbSet<TEntity> Entities { get; set; }
@@ -32,6 +35,12 @@ namespace Dimogir.Services
         public TEntity Load(TKey key)
         {
             return Entities.Find(key);
+        }
+
+        public void Create(TEntity entity)
+        {
+            Entities.Add(entity);
+            DbContext.SaveChanges();
         }
     }
 }
