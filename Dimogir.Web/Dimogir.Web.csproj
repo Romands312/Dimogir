@@ -426,6 +426,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Dimogir.DataAccess\Dimogir.DataAccess.csproj">
+      <Project>{B89558E5-3319-4F53-8BAF-BC919BC55AED}</Project>
+      <Name>Dimogir.DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dimogir.DomainModel\Dimogir.DomainModel.csproj">
       <Project>{AD738B28-6C46-4579-936D-1F82249B6D8B}</Project>
       <Name>Dimogir.DomainModel</Name>

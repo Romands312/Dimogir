@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using Dimogir.DataAccess;
@@ -10,37 +11,49 @@ namespace Dimogir.Services
         where TEntity : Entity<TKey>
     {
         TEntity[] GetAll();
+
         TEntity Load(TKey key);
 
         void Create(TEntity entity);
+
+        IDbSet<TEntity> Get();
     }
 
-    public abstract class Repository<TEntity, TKey> : IRepository<TEntity, TKey>
+    public abstract class Repository<TEntity, TKey> : IRepository<TEntity, TKey>, IDisposable
         where TEntity : Entity<TKey>
     {
-        protected DbSet<TEntity> Entities { get; set; }
 
         protected DimogirContext DbContext;
+        private IUnitOfWork _unitOfWork;
 
-        public Repository()
+        public Repository(IUnitOfWork unitOfWork)
         {
-            DbContext = new DimogirContext();
+            _unitOfWork = unitOfWork;
         }
 
         public TEntity[] GetAll()
         {
-            return Entities.ToArray();
+            return Get().ToArray();
         }
 
         public TEntity Load(TKey key)
         {
-            return Entities.Find(key);
+            return Get().Find(key);
         }
 
         public void Create(TEntity entity)
         {
-            Entities.Add(entity);
-            DbContext.SaveChanges();
+            _unitOfWork.Set<TEntity>().Add(entity);
+        }
+
+        public IDbSet<TEntity> Get()
+        {
+            return _unitOfWork.Set<TEntity>();
+        }
+
+        public void Dispose()
+        {
+            var a = 0;
         }
     }
 }

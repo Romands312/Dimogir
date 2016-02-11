@@ -16,13 +16,5 @@ namespace Dimogir.DataAccess
             modelBuilder.Entity<Category>().ToTable("Category");
             modelBuilder.Entity<Exercise>().ToTable("Exercise");
         }
-
-        public DbSet<Category> Categories { get; set; }
-
-        public DbSet<Exercise> Exercises { get; set; }
-
-        public DbSet<Lesson> Lessons { get; set; }
-
-        
     }
 }
