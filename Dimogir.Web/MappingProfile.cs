@@ -21,6 +21,8 @@ namespace Dimogir.Web
             CreateMap<LessonEditViewModel, Lesson>()
                 .ForMember(dest => dest.Id, cfg => cfg.Ignore());
 
+            CreateMap<CategoryEditViewModel, Category>();
+
 
         }
     }

@@ -28,6 +28,21 @@ namespace Dimogir.Web.Controllers
             return View();
         }
 
+        public ActionResult AddCategory()
+        {
+            CategoryEditViewModel categoryEditViewModel = new CategoryEditViewModel();
+            return View(categoryEditViewModel);
+        }
+
+        [HttpPost]
+        [ActionName("AddCategory")]
+        public ActionResult AddCategoryPost(CategoryEditViewModel categoryEditViewModel)
+        {
+            Category category = Mapper.Map<Category>(categoryEditViewModel);
+            _categoryService.Create(category);
+            return RedirectToAction("Index");
+        }
+
         public ActionResult AddLesson()
         {
             LessonEditViewModel lessonEditViewModel = new LessonEditViewModel();
@@ -41,7 +56,7 @@ namespace Dimogir.Web.Controllers
         {
             Lesson lesson = Mapper.Map<Lesson>(lessonEditViewModel);
             _lessonService.Create(lesson);
-            return null;
+            return RedirectToAction("Index");
         }
     }
 }

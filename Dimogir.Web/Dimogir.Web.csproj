@@ -178,6 +178,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\logo-nav.css" />
     <Content Include="Content\logo.png" />
+    <Content Include="Dimogir.publish.xml" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
@@ -194,6 +195,7 @@
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\PublishProfiles\Smarterasp.pubxml" />
     <None Include="scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="scripts\site.js" />
     <Content Include="scripts\bootstrap.js" />
@@ -377,6 +379,7 @@
     <Compile Include="MappingProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\NinjectDependencyResolver.cs" />
+    <Compile Include="ViewModels\CategoryEditViewModel.cs" />
     <Compile Include="ViewModels\CategoryListViewModel.cs" />
     <Compile Include="ViewModels\LessonEditViewModel.cs" />
     <Compile Include="ViewModels\LessonListViewModel.cs" />
@@ -414,6 +417,8 @@
     <Content Include="scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
     <Content Include="scripts\tinymce\skins\lightgray\fonts\readme.md" />
     <Content Include="scripts\tinymce\langs\readme.md" />
+    <Content Include="Views\Admin\AddCategory.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
