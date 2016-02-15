@@ -17,6 +17,8 @@ namespace Dimogir.Web.ViewModels
 
         public string CategoryId { get; set; }
 
+        public LessonViewModel[] Lessons { get; set; }
+
         public CategoryViewModel[] Categories { get; set; }
     }
 }

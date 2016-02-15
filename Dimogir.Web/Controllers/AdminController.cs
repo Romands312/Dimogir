@@ -46,6 +46,8 @@ namespace Dimogir.Web.Controllers
         public ActionResult AddLesson()
         {
             LessonEditViewModel lessonEditViewModel = new LessonEditViewModel();
+            lessonEditViewModel.Lessons = Mapper.Map<LessonViewModel[]>(_lessonService.GetAll());
+            lessonEditViewModel.Lessons = lessonEditViewModel.Lessons.OrderBy(lesson => lesson.Title).ToArray();
             lessonEditViewModel.Categories = Mapper.Map<CategoryViewModel[]>(_categoryService.GetAll());
             return View(lessonEditViewModel);
         }

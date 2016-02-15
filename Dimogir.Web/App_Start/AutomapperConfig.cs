@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using AutoMapper;
+﻿using AutoMapper;
 
-namespace Dimogir.Web.App_Start
+namespace Dimogir.Web
 {
     public class AutomapperConfig
     {
