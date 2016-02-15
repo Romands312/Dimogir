@@ -406,7 +406,7 @@
     <Content Include="Views\Lesson\CategoryList.cshtml" />
     <Content Include="Views\Exercise\List.cshtml" />
     <Content Include="Views\Lesson\List.cshtml" />
-    <Content Include="Views\Admin\AddLesson.cshtml" />
+    <Content Include="Views\Admin\EditLesson.cshtml" />
     <Content Include="scripts\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <Content Include="scripts\tinymce\skins\lightgray\fonts\tinymce.ttf" />
     <Content Include="scripts\tinymce\skins\lightgray\fonts\tinymce.json" />
@@ -417,7 +417,7 @@
     <Content Include="scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
     <Content Include="scripts\tinymce\skins\lightgray\fonts\readme.md" />
     <Content Include="scripts\tinymce\langs\readme.md" />
-    <Content Include="Views\Admin\AddCategory.cshtml" />
+    <Content Include="Views\Admin\EditCategory.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

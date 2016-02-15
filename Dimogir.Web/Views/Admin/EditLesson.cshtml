@@ -1,6 +1,6 @@
 ﻿@model Dimogir.Web.ViewModels.LessonEditViewModel
 
-@using (Html.BeginForm("AddLesson", "Admin", FormMethod.Post, new Dictionary<string, object> { { "class", "form-horizontal" }, {"id", "add-lesson-form"} }))
+@using (Html.BeginForm("CreateOrUpdateLesson", "Admin", FormMethod.Post, new Dictionary<string, object> { { "class", "form-horizontal" }, {"id", "add-lesson-form"} }))
 {
     <h1>Добавление урока</h1>
 
@@ -23,7 +23,7 @@
             Родительский урок
         </label>
         <div class="col-sm-10">
-            <select name="@nameof(Model.CategoryId).ToLowerInvariant()">
+            <select name="@nameof(Model.ParentId).ToLowerInvariant()">
                 @foreach (var lesson in Model.Lessons)
                 {
                     <option value="@lesson.Key">@lesson.Title</option>
