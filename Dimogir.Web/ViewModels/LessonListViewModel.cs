@@ -20,7 +20,11 @@ namespace Dimogir.Web.ViewModels
 
     public class LessonListViewModel
     {
-        public LessonListViewModel(Lesson[] lessons = null, string categoryName = null)
+        public LessonListViewModel()
+        {
+        }
+
+        public LessonListViewModel(Lesson[] lessons, string categoryName)
         {
             Lessons = Mapper.Map<LessonViewModel[]>(lessons);
             CategoryName = categoryName;

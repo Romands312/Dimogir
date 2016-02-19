@@ -12,22 +12,20 @@ namespace Dimogir.Web.ViewModels
         public IndexViewModel(Category[] categories, Lesson[] lessons)
         {
             CategoryList = new CategoryListViewModel(categories);
-            LessonLists = new List<LessonListViewModel>();
+            LessonLists = new LessonListViewModel[categories.Length];
 
-            foreach (Category category in categories)
+            for (int i = 0; i < categories.Length; i++)
             {
-                var lessonList = new LessonListViewModel
+                LessonLists[i] = new LessonListViewModel
                 (
-                    lessons.Where(les => les.CategoryId == category.Id).ToArray(),
-                    category.Name
+                    lessons.Where(les => les.CategoryId == categories[i].Id).ToArray(),
+                    categories[i].Name
                 );
-
-                LessonLists.Add(lessonList);
             }
         }
 
         public CategoryListViewModel CategoryList { get; set; }
 
-        public List<LessonListViewModel> LessonLists { get; set; }
+        public LessonListViewModel[] LessonLists { get; set; }
     }
 }

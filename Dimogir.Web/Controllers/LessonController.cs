@@ -26,8 +26,7 @@ namespace Dimogir.Web.Controllers
         {
             Category[] categories = _categoryService.GetAll();
 
-            var categoryListViewModel = new CategoryListViewModel();
-            categoryListViewModel.Categories = Mapper.Map<CategoryViewModel[]>(categories);
+            var categoryListViewModel = new CategoryListViewModel(categories);
 
             return View("CategoryList", categoryListViewModel);
         }
@@ -40,8 +39,7 @@ namespace Dimogir.Web.Controllers
 
             Lesson[] lessons = _lessonService.Find(categoryKey);
 
-            var lessonListViewModel = new LessonListViewModel(lessons);
-            lessonListViewModel.CategoryName = category.Name;
+            var lessonListViewModel = new LessonListViewModel(lessons, category.Name);
 
             return View("List", lessonListViewModel);
         }

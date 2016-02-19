@@ -16,7 +16,11 @@ namespace Dimogir.Web.ViewModels
 
     public class CategoryListViewModel
     {
-        public CategoryListViewModel(Category[] categories = null)
+        public CategoryListViewModel()
+        {    
+        }
+
+        public CategoryListViewModel(Category[] categories)
         {
             Categories = Mapper.Map<CategoryViewModel[]>(categories);
         }

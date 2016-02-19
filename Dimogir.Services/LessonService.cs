@@ -15,13 +15,26 @@ namespace Dimogir.Services
     {
         private const int MAX_DEPTH = 32;
 
+        public Lesson GetParent(int parentId)
+        {
+            return Get().SingleOrDefault(les => les.Id == parentId);
+        }
+
+        public Lesson[] GetChildren(Lesson lesson)
+        {
+            if (lesson == null)
+                throw new ArgumentNullException(nameof(lesson));
+
+            return Get().Where(les => les.ParentId == lesson.Id).ToArray();
+        }
+
         public int GetDepth(Lesson lesson)
         {
             int depth = 0;
             Lesson currentLesson = lesson;
 
             if (lesson == null)
-                throw new ArgumentNullException("Null value for lesson is not allowed");
+                throw new ArgumentNullException(nameof(lesson));
             if (!Get().Contains(lesson))
                 throw new ArgumentException("The value of lesson is not in the database");
 
@@ -30,11 +43,11 @@ namespace Dimogir.Services
                 if (currentLesson.ParentId == null)
                     break;
 
-                currentLesson = Get().SingleOrDefault(les => les.Id == currentLesson.ParentId);
+                currentLesson = GetParent(currentLesson.ParentId ?? 0);
 
                 //if(currentLesson == null)
                 //    throw new Exception("ПЕСДА В БАЗЕ ДАННЫХ");
-                
+
                 depth++;
             }
 
@@ -43,7 +56,7 @@ namespace Dimogir.Services
 
         private Lesson GetFarthestDescendant(Lesson lesson, out int depth, int curDepth = 0)
         {
-            Lesson[] children = Get().Where(les => les.ParentId == lesson.Id).ToArray();
+            Lesson[] children = GetChildren(lesson);
             
             if(children.Length == 0)
             {
@@ -59,7 +72,7 @@ namespace Dimogir.Services
                 lastLessons[i] = GetFarthestDescendant(children[i], out depths[i], curDepth + 1);
             }
 
-            var maxDepthIndex = Utilities.MaxWithIndex(depths, x => x).Item2;
+            int maxDepthIndex = Utilities.MaxWithIndex(depths, x => x).Item2;
 
             depth = depths[maxDepthIndex];
             return lastLessons[maxDepthIndex];
