@@ -1,1 +1,26 @@
-﻿<h1>Добро пожаловать в адскую админку</h1>
+﻿@model Dimogir.Web.ViewModels.IndexViewModel
+
+<h1>Добро пожаловать в адскую админку</h1>
+
+В адской админке обязательно должны присутствовать <i>МЕМАСЫ</i>, особенно когда эта админка делается <b>ЛЁХОЙ</b>.
+<a href="http://niceme.me">Memasiki</a> podkatili))
+
+А теперь о делах.
+
+@for (int i = 0; i < Model.CategoryList.Categories.Length; i++)
+{
+    <div>
+        <a href=#>@Model.CategoryList.Categories[i].Name</a>
+
+        @if (Model.LessonLists[i].Lessons != null)
+        {
+            foreach (var lesson in Model.LessonLists[i].Lessons)
+            {
+                <div>
+                    <a href=#>@lesson.Title</a>
+                    <div class="well well-sm">@lesson.Description</div>
+                </div>
+            }
+        }
+    </div>
+}

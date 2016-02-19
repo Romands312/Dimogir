@@ -25,7 +25,11 @@ namespace Dimogir.Web.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            return View();
+            Category[] categories = _categoryService.GetAll();
+            Lesson[] lessons = _lessonService.GetAll();
+
+            IndexViewModel indexViewModel = new IndexViewModel(categories, lessons);
+            return View(indexViewModel);
         }
 
         public ActionResult EditCategory()

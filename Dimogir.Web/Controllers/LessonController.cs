@@ -27,7 +27,7 @@ namespace Dimogir.Web.Controllers
             Category[] categories = _categoryService.GetAll();
 
             var categoryListViewModel = new CategoryListViewModel();
-            categoryListViewModel.CategoryViewModels = Mapper.Map<CategoryViewModel[]>(categories);
+            categoryListViewModel.Categories = Mapper.Map<CategoryViewModel[]>(categories);
 
             return View("CategoryList", categoryListViewModel);
         }

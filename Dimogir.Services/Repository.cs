@@ -2,6 +2,8 @@
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Xml.Linq;
 using Dimogir.DataAccess;
 using Dimogir.DomainModel;
 
@@ -44,6 +46,11 @@ namespace Dimogir.Services
         public void Create(TEntity entity)
         {
             _unitOfWork.Set<TEntity>().Add(entity);
+        }
+
+        public void Delete(TEntity entity)
+        {
+            _unitOfWork.Set<TEntity>().Remove(entity);
         }
 
         public IDbSet<TEntity> Get()

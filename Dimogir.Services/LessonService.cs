@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Dimogir.DomainModel;
 
 namespace Dimogir.Services
@@ -12,6 +13,57 @@ namespace Dimogir.Services
 
     public class LessonService : Repository<Lesson,int>, ILessonService
     {
+        private const int MAX_DEPTH = 32;
+
+        public int GetDepth(Lesson lesson)
+        {
+            int depth = 0;
+            Lesson currentLesson = lesson;
+
+            if (lesson == null)
+                throw new ArgumentNullException("Null value for lesson is not allowed");
+            if (!Get().Contains(lesson))
+                throw new ArgumentException("The value of lesson is not in the database");
+
+            while (true)
+            {
+                if (currentLesson.ParentId == null)
+                    break;
+
+                currentLesson = Get().SingleOrDefault(les => les.Id == currentLesson.ParentId);
+
+                //if(currentLesson == null)
+                //    throw new Exception("ПЕСДА В БАЗЕ ДАННЫХ");
+                
+                depth++;
+            }
+
+            return depth;
+        }
+
+        private Lesson GetFarthestDescendant(Lesson lesson, out int depth, int curDepth = 0)
+        {
+            Lesson[] children = Get().Where(les => les.ParentId == lesson.Id).ToArray();
+            
+            if(children.Length == 0)
+            {
+                depth = curDepth;
+                return lesson;
+            }
+
+            Lesson[] lastLessons = new Lesson[children.Length];
+            int[] depths = new int[children.Length];
+
+            for (int i = 0; i < children.Length; i++)
+            {
+                lastLessons[i] = GetFarthestDescendant(children[i], out depths[i], curDepth + 1);
+            }
+
+            var maxDepthIndex = Utilities.MaxWithIndex(depths, x => x).Item2;
+
+            depth = depths[maxDepthIndex];
+            return lastLessons[maxDepthIndex];
+        }
 
         public Lesson[] Find(string categoryKey)
         {

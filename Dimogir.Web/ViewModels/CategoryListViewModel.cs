@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using AutoMapper;
+using Dimogir.DomainModel;
 
 namespace Dimogir.Web.ViewModels
 {
@@ -14,6 +16,11 @@ namespace Dimogir.Web.ViewModels
 
     public class CategoryListViewModel
     {
-        public CategoryViewModel [] CategoryViewModels { get; set; }
+        public CategoryListViewModel(Category[] categories = null)
+        {
+            Categories = Mapper.Map<CategoryViewModel[]>(categories);
+        }
+
+        public CategoryViewModel [] Categories { get; set; }
     }
 }
