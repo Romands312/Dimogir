@@ -103,6 +103,8 @@ namespace Dimogir.Services
             if (GetHeightOf(root) + GetDepthOf(newParent) > MaxTreeDepth)
                 throw new InvalidOperationException("Depth of the lesson hierarchy cannot exceed the maximum value of MaxTreeDepth = " + MaxTreeDepth);
 
+            root.ParentId = newParentId;
+
             if (root.CategoryId != newParent.CategoryId)
                 ChangeCategoryOfSubtree(root, newParent.CategoryId);
         }
@@ -126,15 +128,11 @@ namespace Dimogir.Services
         {
             Lesson[] subtree = GetSubtreeOf(root);
 
-            Delete(root);
             root.CategoryId = categoryId;
-            Create(root);
 
             foreach (var lesson in subtree)
             {
-                Delete(lesson);
                 lesson.CategoryId = categoryId;
-                Create(lesson);
             }
         }
 
@@ -175,8 +173,7 @@ namespace Dimogir.Services
 
             return lessons.Where(les => les.ParentId == lesson.Id);
         }
-
-
+        
         public static int DepthOf(this IQueryable<Lesson> lessons, Lesson lesson)
         {
             if (lessons == null)
@@ -234,17 +231,11 @@ namespace Dimogir.Services
 
             List<Lesson> ret = new List<Lesson>();
             Lesson[] children = lessons.WhereChildrenOf(lesson).ToArray();
-            
-            if (children.Length == 0)
-                return default(Lesson[]);
 
-            Lesson[][] rest = new Lesson[children.Length][];
-
-            for (int i = 0; i < children.Length; i++)
+            foreach (var child in children)
             {
-                rest[i] = SubtreeOf(lessons, children[i], maxLevel == -1 ? -1 : maxLevel - 1);
-                ret.Add(children[i]);
-                ret.AddRange(rest[i]);
+                ret.Add(child);
+                ret.AddRange(SubtreeOf(lessons, child, maxLevel == -1 ? -1 : maxLevel - 1));
             }
 
             return ret.ToArray();
