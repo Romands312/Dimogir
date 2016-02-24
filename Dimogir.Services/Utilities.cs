@@ -9,12 +9,30 @@ namespace Dimogir.Services
 {
     public static class Utilities
     {
-        public static Tuple<TSource, int> MaxWithIndex<TSource>(IEnumerable<TSource> source, Func<TSource, decimal?> selector) 
+        public static Tuple<TSource, int> MaxWithIndex<TSource>(this IEnumerable<TSource> source)
         {
-            return !source.Any() ? null :
-                   source
-                   .Select((value, index) => new Tuple<TSource, int>(value, index))
-                   .Aggregate((a, b) => (selector(a.Item1) > selector(b.Item1)) ? a : b);
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            Comparer<TSource> comparer = Comparer<TSource>.Default;
+
+            return MaxWithIndex<TSource>(source, comparer.Compare);
+        }
+
+        public static Tuple<TSource, int> MaxWithIndex<TSource>(this IEnumerable<TSource> source, Comparison<TSource> comparison) 
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            if (comparison == null)
+                throw new ArgumentNullException(nameof(comparison));
+
+            var result = source
+                         .DefaultIfEmpty()
+                         .Select((value, index) => new { Value = value, Index = index })
+                         .Aggregate((a, b) => comparison(a.Value, b.Value) >= 0 ? a : b);
+
+            return result == null ? null : 
+                                    Tuple.Create(result.Value, result.Index);
         }
     }
 }

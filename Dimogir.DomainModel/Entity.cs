@@ -12,4 +12,22 @@ namespace Dimogir.DomainModel
     {
         public TKey Id { get; set; }
     }
+
+    public static class EntityUtilities
+    {
+        public static TEntity Find<TEntity, TKey>(this IEnumerable<TEntity> table, TKey id) where TEntity : Entity<TKey>
+        {
+            return table.FirstOrDefault(e => e.Id.Equals(id));
+        }
+
+        public static TEntity Find<TEntity>(this IQueryable<TEntity> table, int id) where TEntity : Entity<int>
+        {
+            return table.FirstOrDefault(e => e.Id == id);
+        }
+
+        public static TEntity Find<TEntity>(this IQueryable<TEntity> table, string id) where TEntity : Entity<string>
+        {
+            return table.FirstOrDefault(e => e.Id == id);
+        }
+    }
 }

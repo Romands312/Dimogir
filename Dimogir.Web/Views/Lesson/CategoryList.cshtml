@@ -2,7 +2,7 @@
 
 <h1>Адский список категорий</h1>
 
-@foreach (var category in Model.CategoryViewModels)
+@foreach (var category in Model.Categories)
 {
     <div>
         <a href="@Url.RouteUrl("LessonList", new { categoryKey = category.Key })">@category.Name</a>

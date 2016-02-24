@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Microsoft.SqlServer.Types;
 
 namespace Dimogir.Web
 {
@@ -16,6 +17,7 @@ namespace Dimogir.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AutomapperConfig.RegisterMappings();
+            SqlServerTypes.Utilities.LoadNativeAssemblies(Server.MapPath("~/bin"));
         }
     }
 }
